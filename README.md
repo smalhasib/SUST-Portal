@@ -8,7 +8,7 @@ Expected Timeline
 Features Descriptions :
 -----------------------
 
-***GU Design :*** It is the graphical view of our porject . It will show different portions for different purpose. In every submission we will try to improve it more and more.  
+***GU Design :***  *It is the graphical view of our porject . It will show different portions for different purpose. In every submission we will try to improve it more and more*.  
 
 ***Authentication and Registration :*** Every users will provide their real identities and get registered in our site. Using this identity he will perform different types of work in out site. 
 
