@@ -1,0 +1,29 @@
+{
+    "name": "mern",
+    "version": "1.0.0",
+    "description": "Mern Practise",
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemon index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Hasibul-Islam-Shanto/MernStack-Practise.git"
+    },
+    "keywords": [
+        "123"
+    ],
+    "author": "Md Hasibul Islam Shanto",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Hasibul-Islam-Shanto/MernStack-Practise/issues"
+    },
+    "homepage": "https://github.com/Hasibul-Islam-Shanto/MernStack-Practise#readme",
+    "dependencies": {
+        "axios": "^0.24.0",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "mongoose": "^6.0.13",
+        "nodemon": "^2.0.15"
+    }
+}
