@@ -1,0 +1,32 @@
+.post_container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 10%;
+}
+
+.show_post {
+    max-width: 90%;
+    width: 100%;
+    height: auto;
+    background: #fff;
+    padding: 7px 20px;
+    border-radius: 10px;
+    margin: 1.4rem 0rem;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+}
+
+.show_post h3 {
+    text-align: center;
+    margin: 1rem 0rem;
+    font-size: 1.5rem;
+}
+
+.show_post p {
+    text-align: center;
+    line-height: 1.5;
+    font-size: 17px;
+}

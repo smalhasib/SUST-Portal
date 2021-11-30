@@ -1,0 +1,114 @@
+.login_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login_container .login_wrapper .login_logo {
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.login_container .login_wrapper .login_logo img {
+    height: 180px;
+    width: 180px;
+    border-radius: 50%;
+    position: relative;
+    top: 0;
+    left: 25%;
+    filter: opacity(0.75);
+}
+
+.login_wrapper {
+    max-width: 450px;
+    width: 100%;
+    height: auto;
+    background: #fff;
+    padding: 30px 35px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+}
+
+.login_wrapper .form .input_field {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.login_wrapper .form .input_field .input {
+    width: 100%;
+    padding: 18px 45px;
+    border: none;
+    background: #eeeeee;
+    border-radius: 20px;
+    font-size: 18px;
+}
+
+.login_wrapper .form .btn {
+    width: 70%;
+    margin: 20px auto 0;
+    background: #3f3351;
+    text-align: center;
+    padding: 12px;
+    border-radius: 25px;
+}
+
+.login_wrapper .form .btn:hover {
+    background: rgb(25, 26, 25);
+    background: linear-gradient( 0deg, rgba(25, 26, 25, 1) 10%, rgba(63, 51, 81, 1) 78%);
+}
+
+.login_wrapper .form .btn a {
+    color: #fff;
+}
+
+.login_wrapper .form .input_field i {
+    position: absolute;
+    top: 17px;
+    left: 15px;
+    font-size: 18px;
+    color: #1d2120;
+    opacity: 0.8;
+}
+
+select {
+    width: 100%;
+    padding: 10px 32px;
+    border: none;
+    background: #eeeeee;
+    border-radius: 20px;
+    font-size: 18px;
+}
+
+.file {
+    font-size: 18px;
+    padding: 10px;
+    width: 100%;
+    background: #eeeeee;
+    border-radius: 20px;
+    opacity: 0.8;
+}
+
+.file .file_label {
+    margin-right: 1rem;
+}
+
+.file input {
+    font-size: 15px;
+}
+
+::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: #1d2120;
+    opacity: 0.8;
+}
+
+::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #1d2120;
+}
