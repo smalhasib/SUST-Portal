@@ -18,16 +18,15 @@ const ShowPost = () => {
 
   return (
     <>
-      <div className="post_container">
-        {" "}
+      <div className="showpost_container">
         {post.map((post, key) => {
           return (
             <div className="show_post" key={key}>
-              <h3> {post.title} </h3> <p> {post.description} </p>{" "}
+              <h3> {post.title} </h3> <p> {post.description} </p>
             </div>
           );
-        })}{" "}
-      </div>{" "}
+        })}
+      </div>
     </>
   );
 };

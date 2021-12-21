@@ -2,18 +2,15 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Homepage from "./components/Home/Homepage";
 import Login from "./Login/Login";
-import Post from "./Post/Post";
-import ShowPost from "./Post/ShowPost";
 import Register from "./Registration/Register";
+import "./index.css"
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Homepage />} />
-      <Route path="/post" element={<Post />} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/home" element={<Homepage />} />
+      <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/showpost" element={<ShowPost />} />
     </Routes>
   );
 }

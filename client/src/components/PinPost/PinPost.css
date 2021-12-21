@@ -1,0 +1,30 @@
+.pinpost_container {
+    height: 100vh;
+    width: 22%;
+    display: flex;
+    flex-direction: column;
+}
+
+.pinpost_container .pinpost {
+    height: auto;
+    width: 80%;
+    margin-top: .5rem;
+    margin-left: 2rem;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.pinpost_container .pinpost img {
+    width: 100%;
+    height: 100px;
+}
+
+.pinpost_container .pinpost p {
+    text-align: center;
+}
+
+@media screen and (max-width: 1006px) {
+    .pinpost_container .pinpost {
+        display: none;
+    }
+}

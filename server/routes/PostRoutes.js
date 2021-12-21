@@ -6,7 +6,6 @@ const Post = require('../models/PostSchema')
 
 route.get('/showpost', (req, res) => {
     Post.find().then(post => {
-        console.log(post)
         res.json(post)
     }).catch(err => console.log(err))
 })

@@ -21,15 +21,16 @@ route.post("/login", (req, res) => {
             }
         } else {
             res.send({ message: "User not registered" })
+            res.redirect("/")
         }
     })
 })
 
 
 // Posting Register information.......
-route.post("/register", (req, res) => {
+route.post("/register", async(req, res) => {
     const { name, department, registration, email, password } = req.body
-    User.findOne({ email: email }, (err, user) => {
+    await User.findOne({ email: email }, (err, user) => {
         if (user) {
             res.send({ message: "User already registerd" })
         } else {
@@ -40,7 +41,7 @@ route.post("/register", (req, res) => {
                 email,
                 password
             })
-            user.save(err => {
+            await user.save(err => {
                 if (err) {
                     res.send(err)
                 } else {

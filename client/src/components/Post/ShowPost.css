@@ -1,21 +1,21 @@
-.post_container {
-    height: 100%;
-    width: 100%;
+.showpost_container {
+    width: 58%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: absolute;
-    top: 10%;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .show_post {
-    max-width: 90%;
-    width: 100%;
+    width: 85%;
     height: auto;
     background: #fff;
-    padding: 7px 20px;
-    border-radius: 10px;
-    margin: 1.4rem 0rem;
+    padding: 3px 13px;
+    margin-top: 1.2rem;
     box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
 }
 

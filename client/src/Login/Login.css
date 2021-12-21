@@ -50,21 +50,22 @@
 }
 
 .login_wrapper .form .btn {
-    width: 70%;
-    margin: 20px auto 0;
+    width: 40%;
+    margin: auto;
+    margin-bottom: 1rem;
     background: #3f3351;
     text-align: center;
     padding: 12px;
     border-radius: 25px;
-}
-
-.login_wrapper .form .btn:hover {
-    background: rgb(25, 26, 25);
-    background: linear-gradient( 0deg, rgba(25, 26, 25, 1) 10%, rgba(63, 51, 81, 1) 78%);
-}
-
-.login_wrapper .form .btn a {
     color: #fff;
+    cursor: pointer;
+}
+
+.login_wrapper .form .logIn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
 }
 
 .login_wrapper .form .input_field i {
