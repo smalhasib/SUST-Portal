@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
-import logo from "./sust.jpg";
+
 const Header = () => {
   return (
     <>
       <div className="navbar_container">
         <div className="navbar_logo">
-          <img src={logo} alt="logo" />
+          <img src="/img/sust.jpg" alt="logo" />
           <Link to="/" className="nav_text">
             SUST-PORTAL
           </Link>
