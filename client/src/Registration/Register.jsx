@@ -27,7 +27,7 @@ const Register = () => {
         alert(res.data.message);
       });
     } else {
-      alert("invlid input");
+      alert("invalid input");
     }
   };
   return (

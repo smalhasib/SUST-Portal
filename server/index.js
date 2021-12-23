@@ -7,6 +7,7 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded())
 app.use(cors())
+require('dotenv').config()
 
 // DataBase Connection.........
 mongoose.connect("mongodb://localhost:27017/sustportal", {
