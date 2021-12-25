@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Register.css";
 import reglogo from "./sust.jpg";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     name: "",
     department: "",
@@ -24,10 +26,10 @@ const Register = () => {
     const { name, department, registration, email, password } = user;
     if (name && department && registration && email && password) {
       axios.post("http://localhost:5000/register", user).then((res) => {
-        alert(res.data.message);
+        navigate("/verify");
       });
     } else {
-      alert("invalid input");
+      alert("Please fillup your informations.");
     }
   };
   return (
@@ -94,7 +96,7 @@ const Register = () => {
               <i className="fas fa-lock"></i>
             </div>
             <div className="btn" onClick={register}>
-              <a href="/">Register</a>
+              Register
             </div>
           </div>
         </div>

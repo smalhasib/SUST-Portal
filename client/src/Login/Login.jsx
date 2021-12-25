@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 import loginLogo from "./sust.jpg";
 const Login = () => {
@@ -18,12 +18,18 @@ const Login = () => {
     });
   };
 
-  const login = () => {
-      axios.post("http://localhost:5000/login", user).then((res) => {
-      alert(res.data.message);
-      navigate("/home");
-    });
+  const login = async() => {
+    const res = await axios.post("http://localhost:5000/login", user)
+  
+    if(res.status === 200){
+      console.log(res.data.token)
+      localStorage.setItem('jwtoken', res.data.token)
+      navigate("/home")
+    }else{
+      alert("You don't have any account. Please register first.")
+      navigate("/")
     }
+  };
   return (
     <>
       <div className="login_container">
@@ -57,15 +63,15 @@ const Login = () => {
             <div className="btn" onClick={login}>
               Login
             </div>
-           <div className="logIn">
-             <div className="reg">
-               <Link to="/register">Register</Link>
-             </div>
-        
-            <div className="forgot">
-              <Link to="/">Forgot password</Link>
+            <div className="logIn">
+              <div className="reg">
+                <Link to="/register">Register</Link>
+              </div>
+
+              <div className="forgot">
+                <Link to="/">Forgot password</Link>
+              </div>
             </div>
-           </div>
           </div>
         </div>
       </div>

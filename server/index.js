@@ -14,7 +14,7 @@ mongoose.connect("mongodb://localhost:27017/sustportal", {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }).then(() => console.log("DataBase is Connected Successfully....."))
-    .catch((err) => console.log("DataBase is connnected...."))
+    .catch((err) => console.log("DataBase is not connnected...."))
 
 const UserRouter = require("./routes/UserRoutes")
 const PostRouter = require("./routes/PostRoutes")
