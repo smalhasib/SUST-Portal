@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
 import "./Register.css";
-import reglogo from "./sust.jpg";
 
 const Register = () => {
   const [user, setUser] = useState({
@@ -35,7 +34,7 @@ const Register = () => {
       <div className="reg_container">
         <div className="reg_wrapper">
           <div className="reg_logo">
-            <img src={reglogo} alt="reglogo" />
+            <img src="/img/sust.jpg" alt="reglogo" />
           </div>
           <div className="form">
             <div className="input_field">

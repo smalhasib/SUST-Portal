@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./Login.css";
-import loginLogo from "./sust.jpg";
+
 const Login = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState({
@@ -19,17 +19,17 @@ const Login = () => {
   };
 
   const login = () => {
-      axios.post("http://localhost:5000/login", user).then((res) => {
+    axios.post("http://localhost:5000/login", user).then((res) => {
       alert(res.data.message);
       navigate("/home");
     });
-    }
+  };
   return (
     <>
       <div className="login_container">
         <div className="login_wrapper">
           <div className="login_logo">
-            <img src={loginLogo} alt="" />
+            <img src="/img/sust.jpg" alt="" />
           </div>
           <div className="form">
             <div className="input_field">
@@ -57,15 +57,15 @@ const Login = () => {
             <div className="btn" onClick={login}>
               Login
             </div>
-           <div className="logIn">
-             <div className="reg">
-               <Link to="/register">Register</Link>
-             </div>
-        
-            <div className="forgot">
-              <Link to="/">Forgot password</Link>
+            <div className="logIn">
+              <div className="reg">
+                <Link to="/register">Register</Link>
+              </div>
+
+              <div className="forgot">
+                <Link to="/">Forgot password</Link>
+              </div>
             </div>
-           </div>
           </div>
         </div>
       </div>
