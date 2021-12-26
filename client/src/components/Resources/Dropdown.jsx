@@ -6,13 +6,6 @@ import { Scrollbars } from "react-custom-scrollbars";
 const Dropdown = ({ selected, setSelected }) => {
   const [isActive, setIsActive] = useState(false);
 
-  let arrowClass;
-  if (isActive) {
-    arrowClass = "fa-sort-up";
-  } else {
-    arrowClass = "fa-caret-down";
-  }
-
   const dropdownButtonClickHandler = (event) => {
     setIsActive(!isActive);
   };
@@ -27,7 +20,7 @@ const Dropdown = ({ selected, setSelected }) => {
       <div className="dropdown">
         <div className="dropdown-btn" onClick={dropdownButtonClickHandler}>
           {selected}
-          <span className={`fas ` + arrowClass}></span>
+          <span className={isActive ? "fas fa-sort-up" : "fas fa-caret-down"}></span>
         </div>
         {isActive && (
           <div className="dropdown-content">

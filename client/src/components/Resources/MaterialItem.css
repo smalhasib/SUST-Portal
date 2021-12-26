@@ -1,0 +1,17 @@
+.material_container {
+    padding: 10px 20px;
+}
+
+.material_container a {
+    font-size: x-large;
+    color: black;
+}
+
+.material_container p {
+    margin-top: 10px;
+    color: #999999;
+}
+
+.material_container:hover {
+    background: #ddd6ff;
+}
