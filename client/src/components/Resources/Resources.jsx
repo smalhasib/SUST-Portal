@@ -4,15 +4,19 @@ import CourseItem from "./CourseItem";
 import Dropdown from "./Dropdown";
 import "./Resources.css";
 import { COURSES, DEPARTMENT } from "../../data";
+import UploadDialog from "./UploadDialog";
 
 const Resources = () => {
   const [selected, setSelected] = useState("Choose a department");
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const selectedShort = DEPARTMENT.filter((dept) => dept.name === selected)
     .flatMap((dept) => dept.short)
     .toString();
 
-  console.log(selectedShort);
+  const dialogBoxHandler = () => {
+    setIsDialogOpen(!isDialogOpen)
+  }
 
   return (
     <>
@@ -23,13 +27,15 @@ const Resources = () => {
           backgroundImage: `url("/img/archive.png")`,
         }}
       >
+        <UploadDialog open={isDialogOpen} onClose={dialogBoxHandler}/>
+
         <div className="resource_header">
           <div className="resource_text">
             <p>SUST EDUCATIONAL ARCHIVE</p>
           </div>
           <div className="resource_option">
             <Dropdown selected={selected} setSelected={setSelected} />
-            <button>Upload Resource</button>
+            <button onClick={dialogBoxHandler}>Upload Resource</button>
           </div>
         </div>
         <div className="resource_item">

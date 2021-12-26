@@ -1,0 +1,72 @@
+.dialog_container {
+  width: 600px;
+  height: 400px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #674ea7;
+  padding: 50px;
+  z-index: 1000;
+  border-radius: 20px;
+}
+
+.dialog_container button {
+    background-color: white; /* Green */
+    border: 2px solid #008CBA;
+    color: black;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    font-size: large;
+    position: absolute;
+    right: 8%;
+    border-radius: 12px;
+}
+
+.dialog_container button:hover {
+    background-color: #008CBA;
+    color: white;
+}
+
+.dialog_overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+}
+
+.dialog_info {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.dialog_info .dialog_file label {
+    font-size: 18px;
+    color: white;
+}
+
+.dialog_info .dialog_file input {
+    font-size: 18px;
+    background: white;
+}
+
+.rdtPicker {
+  width: 500px;
+}
+
+.rdt input {
+    width: 500px;
+    height: 40px;
+    font-size: 18px;
+}
