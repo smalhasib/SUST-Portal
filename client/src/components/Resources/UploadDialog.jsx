@@ -7,13 +7,13 @@ import "react-datetime/css/react-datetime.css";
 import axios from "axios";
 
 const UploadDialog = ({ open, onClose }) => {
-  const [resource, setResource] = useState({
+  const [resourceInfo, setResourceInfo] = useState({
     department: "",
-    cousreName: "",
+    courseName: "",
     courseCode: "",
-    file: [],
     year: "",
   });
+  const [file, setFile] = useState("");
   const [courses, setCourses] = useState([]);
 
   const dept = DEPARTMENT.map((dept) => ({
@@ -32,49 +32,55 @@ const UploadDialog = ({ open, onClose }) => {
           label: course.name,
         }))
     );
-    setResource({
-      ...resource,
+    setResourceInfo({
+      ...resourceInfo,
       department: selected.value,
     });
   };
 
   const courseSelectHandler = (selected) => {
-    setResource({
-      ...resource,
+    setResourceInfo({
+      ...resourceInfo,
       courseCode: selected.value,
-      cousreName: selected.label,
+      courseName: selected.label,
     });
   };
 
   const yearSelectHandler = (date) => {
-    setResource({
-      ...resource,
+    setResourceInfo({
+      ...resourceInfo,
       year: new Date(date._d).getFullYear(),
     });
   };
 
   const fileSelectedHandler = (event) => {
-    const file = event.target.files[0];
-    console.log(file);
-
-    setResource({
-      ...resource,
-      file: {
-        lastModified: file.lastModified,
-        lastModifiedDate: file.lastModifiedDate,
-        name: file.name,
-        size: file.size,
-        type: file.type,
-      },
-    });
+    setFile(event.target.files[0]);
   };
 
   const submitHandler = () => {
-    console.log(resource);
+    const { department, courseName, courseCode, year } = resourceInfo;
+
+    if (
+      department === "" ||
+      courseName === "" ||
+      courseCode === "" ||
+      year === "" ||
+      file === ""
+    ) {
+      alert("All fields are required for submitting resource.");
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("department", resourceInfo.department);
+    formData.append("courseName", resourceInfo.courseName);
+    formData.append("courseCode", resourceInfo.courseCode);
+    formData.append("year", resourceInfo.year);
+
     axios
-      .post("http://localhost:5000/resources/post", resource)
+      .post("http://localhost:5000/resources/upload", formData)
       .then((res) => {
-        alert(res.data.massage);
+        alert(res.data);
       })
       .catch((err) => alert(err));
     onClose();

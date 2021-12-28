@@ -13,10 +13,12 @@ route.get("/showpost", (req, res) => {
 
 route.post("/post", (req, res) => {
   const { title, description } = req.body;
+
   const post = new Post({
     title,
     description,
   });
+
   post.save((err) => {
     if (err) {
       res.send(err);

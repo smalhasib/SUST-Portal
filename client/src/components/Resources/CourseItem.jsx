@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import "./CourseItem.css";
-import MaterialItem from "./MaterialItem";
+import ResourceItem from "./ResourceItem";
 
 const CourseItem = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,10 +32,14 @@ const CourseItem = (props) => {
           }
         >
           <div className="content">
-            <MaterialItem/>
-            <MaterialItem/>
-            <MaterialItem/>
-            <MaterialItem/>
+            {props.data.map((resource) => (
+              <ResourceItem
+                key={resource._id}
+                name={resource.fileName}
+                link={resource.filePath}
+                size={resource.fileSize}
+              />
+            ))}
           </div>
         </div>
       </div>

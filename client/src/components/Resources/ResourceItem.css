@@ -2,12 +2,12 @@
     padding: 10px 20px;
 }
 
-.material_container a {
+.material_container .name {
     font-size: x-large;
     color: black;
 }
 
-.material_container p {
+.material_container .size {
     margin-top: 10px;
     color: #999999;
 }

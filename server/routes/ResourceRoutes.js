@@ -1,45 +1,48 @@
 const express = require("express");
 const route = express.Router();
-const mongoose = require("mongoose");
+const { upload } = require("../helpers/filehelper");
 const Resource = require("../models/ResourceSchema");
-const config = require("../config");
-const Grid = require("gridfs-stream");
 
-module.exports = (upload) => {
-  const connect = mongoose.createConnection(config.mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+route.post("/upload", upload.single("file"), async (req, res, next) => {
+  const { department, courseName, courseCode, year } = req.body;
 
-  let gfs;
-
-  connect.once("open", () => {
-    gfs = Grid(connect.db, mongoose.mongo);
-    gfs.collection("uploads");
-  });
-
-  route.post("/post", upload.single("file"), (req, res) => {
-    const { department, cousreName, courseCode, file, year } = req.body;
-    console.log(req.body);
+  try {
     const resource = new Resource({
       department: department,
-      cousreName: cousreName,
+      courseName: courseName,
       courseCode: courseCode,
-      fileName: file.name,
-      fileId: `${courseCode.toLowerCase()}-${year}`,
+      fileName: `${courseCode.toLowerCase()}-${year}.pdf`,
+      filePath: req.file.path,
+      fileSize: fileSizeFormatter(req.file.size, 2),
       year: year,
     });
-    console.log(resource);
 
-    resource.save()
-      .then((resource) => {
-        res.status(200).json({
-          success: true,
-          resource,
-        });
-      })
-      .catch((err) => res.status(500).json(err));
-  });
+    await resource.save();
+    res.status(201).send("File Uploaded Successfully");
+  } catch (error) {
+    res.status(400).send(error.message);
+    console.log(error);
+  }
+});
 
-  return route;
+route.get("/fetch", async (req, res) => {
+  Resource.find({ department: req.query.dept })
+    .then((resource) => {
+      res.json(resource);
+    })
+    .catch((err) => console.log(err));
+});
+
+const fileSizeFormatter = (bytes, decimal) => {
+  if (bytes === 0) {
+    return "0 Bytes";
+  }
+  const dm = decimal || 2;
+  const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "YB", "ZB"];
+  const index = Math.floor(Math.log(bytes) / Math.log(1000));
+  return (
+    parseFloat((bytes / Math.pow(1000, index)).toFixed(dm)) + " " + sizes[index]
+  );
 };
+
+module.exports = route;

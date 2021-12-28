@@ -1,36 +1,37 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const ResourceSchema = new mongoose.Schema({
+const ResourceSchema = new mongoose.Schema(
+  {
     department: {
-        required: true,
-        type: String,
+      required: true,
+      type: String,
     },
     courseName: {
-        required: true,
-        type: String,
+      required: true,
+      type: String,
     },
     courseCode: {
-        required: true,
-        type: String,
+      required: true,
+      type: String,
     },
     fileName: {
-        required: true,
-        type: String,
+      required: true,
+      type: String,
     },
-    fileId: {
-        required: true,
-        type: String,
+    filePath: {
+      required: true,
+      type: String,
+    },
+    fileSize: {
+      type: String,
+      required: true,
     },
     year: {
-        required: true,
-        type: String,
+      required: true,
+      type: String,
     },
-    createdAt: {
-        default: Date.now(),
-        type: Date,
-    },
-});
+  },
+  { timestamps: true }
+);
 
-const Resource = new mongoose.model("Resource", ResourceSchema);
-
-module.exports = Resource;
+module.exports = mongoose.model("Resource", ResourceSchema);
