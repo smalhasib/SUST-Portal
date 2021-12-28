@@ -8,13 +8,13 @@ import Resources from "./components/Resources/Resources";
 
 function App() {
   return (
-    // <Routes>
-    //   <Route path="/home" element={<Homepage />} />
-    //   <Route path="/" element={<Login />} />
-    //   <Route path="/register" element={<Register />} />
-    //   <Route path="/resources" element={<Resources />} />
-    // </Routes>
-    <Resources />
+    <Routes>
+      <Route path="/home" element={<Homepage />} />
+      <Route path="/" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/resources" element={<Resources />} />
+    </Routes>
+    // <Resources />
   );
 }
 

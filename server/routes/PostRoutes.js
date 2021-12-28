@@ -25,4 +25,5 @@ route.post("/post", (req, res) => {
     }
   });
 });
+
 module.exports = route;
