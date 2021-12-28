@@ -1,0 +1,17 @@
+.show_comment{
+    display: flex;
+    flex-direction: column;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+}
+.show_comment .cmt{
+    display: flex;
+}
+.show_comment .cmt h5{
+    padding: .3rem;
+    opacity: .9;
+}
+.show_comment .cmt i{
+    padding: .2rem;
+    color: #3e065f;
+}

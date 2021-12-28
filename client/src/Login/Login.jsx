@@ -24,7 +24,7 @@ const Login = () => {
     if(res.status === 200){
       console.log(res.data.token)
       localStorage.setItem('jwtoken', res.data.token)
-      navigate("/home")
+      navigate("/homepage")
     }else{
       alert("You don't have any account. Please register first.")
       navigate("/")

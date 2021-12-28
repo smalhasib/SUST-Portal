@@ -1,56 +1,72 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState} from "react";
 import "./Post.css";
-import ShowPost from "./ShowPost";
+import jwt_decode from "jwt-decode";
 const Post = () => {
-  const [post, setPost] = useState({
-    title: "",
-    description: "",
-  });
+  const [title, setTitle] = useState("");
+  const [description, setdescription] = useState("");
+  const [multipleFiles, setMultipleFiles] = useState("");
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setPost({
-      ...post,
-      [name]: value,
-    });
+
+  const MultipleFileChange = (e) => {
+    setMultipleFiles(e.target.files);
   };
-  const Post = () => {
-    axios.post("http://localhost:5000/post/post", post).then((res) => {
-      alert(res.data.message);
-      setPost({ title: "", description: "" });
-    });
-  };
+  const token = localStorage.getItem('jwtoken')
+  var decoded = jwt_decode(token);
+  const UploadMultipleFiles = async () => {
+    if(description.length>0 || multipleFiles.length>0){
+     const formData = new FormData();
+     formData.append("title",title);
+     formData.append("description", description);
+     formData.append("name", decoded.name);
+     formData.append("department", decoded.department);
+     for (let i = 0; i < multipleFiles.length; i++) {
+       formData.append("files", multipleFiles[i]);
+     }
+     await axios.post("http://localhost:5000/post/post",formData);
+    }else{
+      alert("Please write your post..")
+    }
+     window.location.reload()
+   };
+
+  
   return (
     <>
       <div className="post_container">
-        <div className="input_field">
-          <input
-            type="text"
-            placeholder="Title"
-            className="input_title"
-            name="title"
-            value={post.title}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="input_field">
-          <textarea
-            type="text"
-            placeholder="Write what you think..."
-            className="input"
-            name="description"
-            value={post.description}
-            onChange={handleChange}
-            cols="60"
-            rows="5"
-          ></textarea>
-        </div>
-        <div className="btn" onClick={Post}>
-          Post
-        </div>
+      <div className="input_field">
+            <input
+              type="text"
+              className="input_title"
+              placeholder="Title"
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </div>
+          <div className="input_field">
+            <textarea
+              type="text"
+              placeholder="Write your blog...."
+              className="input"
+              onChange={(e) => setdescription(e.target.value)}
+              cols=""
+              rows="3"
+            ></textarea>
+          </div>
+          <div className="file_input">
+            <input
+              type="file"
+              className="file"
+              onChange={(e) => MultipleFileChange(e)}
+            />
+          </div>
+          <button
+            type="button"
+            onClick={() => UploadMultipleFiles()}
+            className="btn"
+          >
+            Post
+          </button>
       </div>
-      <ShowPost />
     </>
   );
 };

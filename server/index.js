@@ -1,6 +1,7 @@
 // External Imports.....
 const express = require('express');
 const mongoose = require('mongoose')
+const path = require('path');
 const cors = require('cors')
 
 const app = express()
@@ -18,9 +19,12 @@ mongoose.connect("mongodb://localhost:27017/sustportal", {
 
 const UserRouter = require("./routes/UserRoutes")
 const PostRouter = require("./routes/PostRoutes")
+const BlogRoutes = require('./routes/BlogPostRoute');
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
     //Routes
 app.use("/", UserRouter)
 app.use("/post", PostRouter)
+app.use('/api', BlogRoutes.routes);
 
 
 // Server is listening here.......
