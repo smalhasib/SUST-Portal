@@ -29,7 +29,7 @@ const Comments =(e)=>{
         {allPost.map((element, index) => (
           <div key={element._id} className="show_post">
              <div className="user_post">
-            <i class="fas fa-user"></i>
+            <i className="fas fa-user"></i>
             <div className="user_dtl">
             <h5>{element.name}</h5>
             <h6>{element.department}</h6> 
@@ -45,7 +45,7 @@ const Comments =(e)=>{
               />
             ))}
               <div className="post_comment">
-              <i class="fas fa-comments"></i>
+              <i className="fas fa-comments"></i>
                 <input type="text"
                 placeholder="comments...."
                 onChange={(e)=> setcomment(e.target.value)}

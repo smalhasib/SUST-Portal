@@ -1,4 +1,4 @@
-const BlogPost = require('../models/BlogPost');
+const BlogPost = require('../models/BlogPostSchema');
 const BlogsUpload = async(req, res, next) => {
     try {
         let filesArray = [];

@@ -5,7 +5,7 @@ const comment = (props) => {
         <>
             <div className="show_comment">
            <div className="cmt">
-           <i class="fas fa-comment"></i> 
+           <i className="fas fa-comment"></i> 
            <h5>{props.comment}</h5>
            </div>
               </div>

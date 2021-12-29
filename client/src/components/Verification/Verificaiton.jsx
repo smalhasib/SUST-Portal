@@ -31,7 +31,7 @@ const Verificaiton = () => {
           </p>
         </div>
         <div className="verify_code">
-          <i class="fas fa-user-check"></i>
+          <i className="fas fa-user-check"></i>
           <input
             type="number"
             name="code"
