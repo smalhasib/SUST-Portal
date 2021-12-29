@@ -13,7 +13,7 @@ const Verificaiton = () => {
   };
   const CheckCode = () => {
     if (code === "12345") {
-      navigate("/");
+      navigate("/login");
     } else {
       alert("Your email is invalid.");
       navigate("/register");

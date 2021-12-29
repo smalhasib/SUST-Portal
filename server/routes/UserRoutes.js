@@ -4,8 +4,8 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const User = require('../models/UserSchema')
-const nodemailer = require('nodemailer')
-
+const nodemailer = require('nodemailer');
+const { google } = require('googleapis');
 
 
 // Posting login information.....
@@ -65,25 +65,48 @@ route.post("/register", async(req, res) => {
 })
 
 const sentVerifiedMail = (email) => {
-    let transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: process.env.EMAIL,
-            pass: process.env.PASSWORD
-        }
+
+
+const oAuth2Client = new google.auth.OAuth2(
+  process.env.CLIENT_ID,
+  process.env.CLEINT_SECRET,
+  process.env.REDIRECT_URI
+);
+oAuth2Client.setCredentials({ refresh_token: process.env.REFRESH_TOKEN });
+
+async function sendMail() {
+  try {
+    const accessToken = await oAuth2Client.getAccessToken();
+
+    const transport = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        type: 'OAuth2',
+        user: process.env.EMAIL,
+        clientId: process.env.CLIENT_ID,
+        clientSecret: process.env.CLEINT_SECRET,
+        refreshToken: process.env.REFRESH_TOKEN,
+        accessToken: accessToken,
+      },
     });
-    let mailOptions = {
-        from: process.env.EMAIL,
-        to: email,
-        subject: 'Verify your account',
-        text: 'Verification code is 12345'
+
+    const mailOptions = {
+      from: process.env.EMAIL,
+      to: email,
+      subject: 'Verification Code',
+      text: 'Verificaiton code is 12345',
     };
-    transporter.sendMail(mailOptions, (err, data) => {
-        if (err) {
-            return console.log('Error occurs');
-        }
-        return console.log('Email sent!!!');
-    });
+
+    const result = await transport.sendMail(mailOptions);
+    return result;
+  } catch (error) {
+    return error;
+  }
+}
+
+sendMail()
+  .then((result) => console.log('Email sent...', result))
+  .catch((error) => console.log(error.message));
 
 }
 
