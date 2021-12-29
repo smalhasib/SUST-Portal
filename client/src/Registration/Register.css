@@ -1,13 +1,4 @@
 @import url("https://fonts.googleapis.com/css?family=Josefin+Sans");
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    outline: none;
-    text-decoration: none;
-    font-family: "Josefin Sans", sans-serif;
-}
-
 .reg_container {
     display: flex;
     justify-content: center;
@@ -62,16 +53,14 @@
 .reg_wrapper .form .btn {
     width: 70%;
     margin: 20px auto 0;
-    background: #3f3351;
+    background: #3e065f;
     text-align: center;
     padding: 12px;
     border-radius: 25px;
     margin-bottom: 1rem;
-}
-
-.reg_wrapper .form .btn:hover {
-    background: rgb(25, 26, 25);
-    background: linear-gradient( 0deg, rgba(25, 26, 25, 1) 10%, rgba(63, 51, 81, 1) 78%);
+    color: #fff;
+    font-size: 1.1rem;
+    cursor: pointer;
 }
 
 .reg_wrapper .form .btn a {
@@ -85,34 +74,6 @@
     font-size: 18px;
     color: #1d2120;
     opacity: 0.8;
-}
-
-select {
-    width: 100%;
-    padding: 10px 32px;
-    border: none;
-    background: #eeeeee;
-    border-radius: 20px;
-    font-size: 18px;
-    font-family: "Josefin Sans", sans-serif;
-}
-
-.file {
-    font-size: 18px;
-    padding: 10px;
-    width: 100%;
-    background: #eeeeee;
-    border-radius: 20px;
-    opacity: 0.8;
-}
-
-.file .file_label {
-    margin-right: 1rem;
-    font-family: "Josefin Sans", sans-serif;
-}
-
-.file input {
-    font-size: 15px;
 }
 
 ::-webkit-input-placeholder {
