@@ -30,39 +30,40 @@ route.post("/login", async(req, res) => {
             res.status(400).json({ error: "Invalid Email" })
         }
 
-    } catch (err) {
-        console.log(err)
-    }
+  } catch (err) {
+      console.log(err)
+  }
 })
 
 // Posting Register information.......
 route.post("/register", async(req, res) => {
-    const { name, department, registration, email, password } = req.body
-    if (!name || !department || !registration || !email || !password) {
-        return res.status(422).json({
-            error: "Please fill all the information "
-        })
-    }
-    try {
-        const existUser = await User.findOne({ email: email });
-        if (existUser) {
-            return res.status(422).json({ error: "User already exist." })
-        }
-        const user = new User({
-            name,
-            department,
-            registration,
-            email,
-            password
-        })
-        await user.save()
-        sentVerifiedMail(user.email)
-        res.status(201).json({ message: "User Register Succesfull.." })
-    } catch (err) {
-        console.log(err)
-    }
+  const { name, department, registration, email, password } = req.body
+  if (!name || !department || !registration || !email || !password) {
+      return res.status(422).json({
+          error: "Please fill all the information "
+      })
+  }
+  try {
+      const existUser = await User.findOne({ email: email });
+      if (existUser) {
+          return res.status(422).json({ error: "User already exist." })
+      }
+      const user = new User({
+          name,
+          department,
+          registration,
+          email,
+          password
+      })
+      await user.save()
+      sentVerifiedMail(user.email)
+      res.status(201).json({ message: "User Register Succesfull.." })
+  } catch (err) {
+      console.log(err)
+  }
 
 })
+
 const sentVerifiedMail = (email) => {
     let transporter = nodemailer.createTransport({
         service: 'gmail',

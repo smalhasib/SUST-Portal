@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 const PostSchema = new mongoose.Schema({
     name:String,
     department:String,
@@ -13,5 +13,5 @@ const PostSchema = new mongoose.Schema({
     files: [Object]
 },{ timestamps: true });
 
-const Post = new mongoose.model("Post", PostSchema)
-module.exports = Post
+const Post = new mongoose.model("Post", PostSchema);
+module.exports = Post;

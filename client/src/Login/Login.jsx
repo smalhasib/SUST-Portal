@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
-import loginLogo from "./sust.jpg";
+
 const Login = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState({
@@ -35,7 +35,7 @@ const Login = () => {
       <div className="login_container">
         <div className="login_wrapper">
           <div className="login_logo">
-            <img src={loginLogo} alt="" />
+            <img src="/img/sust.jpg" alt="" />
           </div>
           <div className="form">
             <div className="input_field">

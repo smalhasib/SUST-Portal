@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
-import logo from "./sust.jpg";
+
 const Header = () => {
   return (
     <>
       <div className="navbar_container">
         <div className="navbar_logo">
-          <img src={logo} alt="logo" />
+          <img src="/img/sust.jpg" alt="logo" />
           <Link to="/" className="nav_text">
             SUST-PORTAL
           </Link>
@@ -22,7 +22,7 @@ const Header = () => {
           <Link to="/blogs" className="nav_text">
             Blogs of SUST
           </Link>
-          <Link to="/homepage" className="nav_text">
+          <Link to="/resources" className="nav_text">
             Resourses
           </Link>
           <Link to="/about" className="nav_text">
