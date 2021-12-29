@@ -10,25 +10,25 @@ const nodemailer = require('nodemailer')
 
 // Posting login information.....
 route.post("/login", async(req, res) => {
-  try {
-      const { email, password } = req.body
-      if (!email || !password) {
-          return res.status(400).json({ error: "Please input your Email and Password." })
-      }
-      const userLogin = await User.findOne({ email: email })
-      if (userLogin) {
-          const isMatch = await bcrypt.compare(password, userLogin.password)
-              //token generating...
-          var token = await userLogin.generateAuthToken(User)
-          if (isMatch) {
-              // res.status(200).json({ message: "User Login Successfull.." })
-              res.status(200).json({ token: token })
-          } else {
-              res.status(400).json({ error: "Login Failed." })
-          }
-      } else {
-          res.status(400).json({ error: "Invalid Email" })
-      }
+    try {
+        const { email, password } = req.body
+        if (!email || !password) {
+            return res.status(400).json({ error: "Please input your Email and Password." })
+        }
+        const userLogin = await User.findOne({ email: email })
+        if (userLogin) {
+            const isMatch = await bcrypt.compare(password, userLogin.password)
+                //token generating...
+            var token = await userLogin.generateAuthToken(User)
+            if (isMatch) {
+                // res.status(200).json({ message: "User Login Successfull.." })
+                res.status(200).json({ token: token })
+            } else {
+                res.status(400).json({ error: "Login Failed." })
+            }
+        } else {
+            res.status(400).json({ error: "Invalid Email" })
+        }
 
   } catch (err) {
       console.log(err)
@@ -87,20 +87,5 @@ const sentVerifiedMail = (email) => {
 
 }
 
-// About page ....
-route.post('/about', async(req, res) => {
-    try {
-        const { token } = req.body
-        const verifyToken = jwt.verify(token, process.env.SECRET_KEY)
-        const rootUser = await User.findOne({ _id: verifyToken._id, "tokens.token": token })
-        req.rootUser = rootUser
-        res.status(200).json(req.rootUser)
-        console.log("User authenticate")
-    } catch (error) {
-        res.status(401).send("No token provided.")
-        console.log(error)
-    }
-
-})
 
 module.exports = route

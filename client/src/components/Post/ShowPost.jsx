@@ -1,34 +1,67 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./ShowPost.css";
+import Comment from "./Comment";
 const ShowPost = () => {
-  const [post, setPost] = useState([
-    {
-      title: "",
-      description: "",
-    },
-  ]);
-
+  const [allPost, setallPost] = useState([]);
+  const [comment, setcomment] = useState('')
+  const [newcomment, setNewcomment] = useState([]);
+  const  getPost = async () => {
+    const showPost = await axios.get("http://localhost:5000/post/postget");
+    setallPost(showPost.data);
+};
+const Comments =(e)=>{
+  e.preventDefault();
+  if(comment.length<0) return;
+  setNewcomment((prevcomment) => {
+    return [...prevcomment, comment];
+  });
+  setcomment(null);
+}
   useEffect(() => {
-    fetch("http://localhost:5000/post/showpost")
-      .then((res) => {
-        if (res.ok) return res.json();
-      })
-      .then((response) => setPost(response));
+    getPost();
   }, []);
 
+
   return (
-    <>
+       <>
       <div className="showpost_container">
-        {post.map((post, key) => {
-          return (
-            <div className="show_post" key={key}>
-              <h3> {post.title} </h3> <p> {post.description} </p>
+        {allPost.map((element, index) => (
+          <div key={element._id} className="show_post">
+             <div className="user_post">
+            <i class="fas fa-user"></i>
+            <div className="user_dtl">
+            <h5>{element.name}</h5>
+            <h6>{element.department}</h6> 
             </div>
-          );
-        })}
+            </div>
+            <h4>{element.title}</h4>
+            <p>{element.description}</p>
+            {element.files.map((file, index) => (
+              <img
+                src={`http://localhost:5000/${file.filePath}`}
+                className="img"
+                alt="img"
+              />
+            ))}
+              <div className="post_comment">
+              <i class="fas fa-comments"></i>
+                <input type="text"
+                placeholder="comments...."
+                onChange={(e)=> setcomment(e.target.value)}
+                />
+                <button onClick={Comments}>comment</button>
+              </div>
+              {
+                newcomment.map((comment,key)=>{
+                  return <Comment comment={comment}/>
+                })
+              }
+         </div>
+        ))}
+     
       </div>
-    </>
+        </>
   );
 };
-
 export default ShowPost;

@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+.home{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+}
+.home .wave{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+.home .home_content{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.home .home_content .content{
+    height: auto;
+    color: #3e065f;
+    padding: 10rem 6rem;
+    text-align: start;
+} 
+.home .about{
+    display: flex;
+    flex-direction: column;
+    color: #3e065f;
+    height: auto;
+    padding: 3rem 4rem;
+}
+.home .about h1{
+    margin-bottom: 1rem;
+}
+.home .about .about_card{
+    max-height: 40px;
+    max-width: 400px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+    margin-bottom: 2rem;
+    padding: .7rem;
+}
+.home .about .about_card:hover{
+    transform: scale(1.1);
+}
+
+@media screen and (max-width: 690px) {
+    .home_content{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .home .about .about_card{
+        max-height: 60px;
+    }
+    .home .home_content .content{
+        padding: 2rem 3rem;
+    }
+}
+@media screen and (max-width: 810px) {
+    .home .about .about_card{
+        max-height: 70px;
+    }
+}

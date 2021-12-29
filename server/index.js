@@ -24,7 +24,9 @@ mongoose
 const UserRouter = require("./routes/UserRoutes");
 const PostRouter = require("./routes/PostRoutes");
 const ResourceRouter = require("./routes/ResourceRoutes");
+const BlogRoutes = require('./routes/BlogPostRoute');
 
+app.use('/api', BlogRoutes.routes);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/", UserRouter);
 app.use("/post", PostRouter);

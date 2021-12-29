@@ -13,6 +13,12 @@ const Header = () => {
           </Link>
         </div>
         <div className="navbar_link">
+        <Link to="/" className="nav_text">
+          Home
+          </Link>
+        <Link to="/homepage" className="nav_text">
+           Daily Updates
+          </Link>
           <Link to="/blogs" className="nav_text">
             Blogs of SUST
           </Link>

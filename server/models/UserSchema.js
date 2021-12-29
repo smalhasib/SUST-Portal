@@ -22,16 +22,18 @@ userSchema.pre("save", async function (next) {
 });
 
 // Generating token....
-userSchema.methods.generateAuthToken = async function () {
-  try {
-    let token = jwt.sign({ _id: this._id }, process.env.SECRET_KEY);
-    this.tokens = this.tokens.concat({ token: token });
-    await this.save();
-    return token;
-  } catch (err) {
-    console.log(err);
-  }
-};
+userSchema.methods.generateAuthToken = async function(User) {
+    try {
+        let token = jwt.sign({_id:this.id, name:this.name, department:this.department}, process.env.SECRET_KEY,{
+            expiresIn: '7d',
+        })
+        this.tokens = this.tokens.concat({ token: token })
+        await this.save()
+        return token
+    } catch (err) {
+        console.log(err)
+    }
+}
 
 const User = new mongoose.model("User", userSchema);
 module.exports = User;

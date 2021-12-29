@@ -35,7 +35,7 @@
 }
 
 .navbar_container .navbar_link .nav_text {
-    margin-right: 3rem;
+    margin-right: 2rem;
     font-size: 18px;
     font-weight: 550;
 }
@@ -46,8 +46,13 @@
     opacity: 0.7;
 }
 
-@media screen and (max-width: 780px) {
+@media screen and (max-width: 810px) {
     .navbar_container .navbar_link .nav_text {
         display: none;
+    }
+}
+@media screen and (max-width: 910px) {
+    .navbar_container .navbar_link .nav_text {
+        margin-right: 1rem;
     }
 }
