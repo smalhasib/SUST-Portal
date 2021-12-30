@@ -1,6 +1,8 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { DEPARTMENT } from "../../../data";
+import axios from "axios";
+import Select from "react-select";
 import "./Register.css";
 
 const Register = () => {
@@ -13,6 +15,11 @@ const Register = () => {
     password: "",
   });
 
+  const dept = DEPARTMENT.map((dept) => ({
+    value: dept.short,
+    label: dept.name,
+  }));
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser({
@@ -21,16 +28,29 @@ const Register = () => {
     });
   };
 
+  const deptSelectHandler = (selected) => {
+    setUser({
+      ...user,
+      department: selected.label,
+    });
+  };
+
   const register = () => {
     const { name, department, registration, email, password } = user;
     if (name && department && registration && email && password) {
-      axios.post("http://localhost:5000/register", user).then((res) => {
-        navigate("/verify");
-      });
+      if (registration.length === 10) {
+        localStorage.setItem("userEmail", email);
+        axios.post("http://localhost:5000/register", user).then((res) => {
+          navigate("/verify");
+        });
+      } else {
+        alert("Please provide correct registration number");
+      }
     } else {
       alert("Please fillup your informations.");
     }
   };
+
   return (
     <>
       <div className="reg_container">
@@ -50,14 +70,27 @@ const Register = () => {
               />
               <i className="fas fa-user"></i>
             </div>
-            <div className="input_field">
-              <input
-                type="text"
-                placeholder="Department"
-                className="input"
-                name="department"
-                value={user.department}
-                onChange={handleChange}
+            <div className="input_field_selector">
+              <Select
+                styles={{
+                  container: (provided, state) => ({
+                    ...provided,
+                    width: "390px",
+                    marginLeft: "39px",
+                  }),
+                  control: (provided, state) => ({
+                    ...provided,
+                    background: "#eeeeee",
+                    borderRadius: "20px",
+                  }),
+                  placeholder: (provided, state) => ({
+                    ...provided,
+                    color: "#1d2120",
+                  }),
+                }}
+                options={dept}
+                onChange={deptSelectHandler}
+                placeholder="Select Department"
               />
               <i className="fas fa-building"></i>
             </div>

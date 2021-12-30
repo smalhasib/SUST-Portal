@@ -3,12 +3,19 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const config = require("./config");
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded());
-app.use(cors());
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
+app.use(cookieParser());
 require("dotenv").config();
 
 // DataBase Connection.........
@@ -24,13 +31,13 @@ mongoose
 const UserRouter = require("./routes/UserRoutes");
 const PostRouter = require("./routes/PostRoutes");
 const ResourceRouter = require("./routes/ResourceRoutes");
-const BlogRoutes = require('./routes/BlogPostRoute');
+const BlogRoutes = require("./routes/BlogPostRoute");
 
-app.use('/api', BlogRoutes.routes);
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/", UserRouter);
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/post", PostRouter);
 app.use("/resources", ResourceRouter);
+app.use("/blog", BlogRoutes);
 
 // Server is listening here.......
 const PORT = "http://locahost:5000";

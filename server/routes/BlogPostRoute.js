@@ -1,15 +1,12 @@
-const express = require('express');
-const { upload } = require('../helpers/filehelper');
-const {
-    BlogsUpload,
-    getBlogs
-} = require('../controllers/fileuploaderController');
+const express = require("express");
+const { upload } = require("../helpers/filehelper");
 const router = express.Router();
+const {
+  PostBlogWithImage,
+  GetBlogPosts,
+} = require("../controllers/BlogPostController");
 
-router.post('/blogUpload', upload.array('files'), BlogsUpload);
-router.get('/getblogs', getBlogs);
+router.post("/post", upload.array("files"), PostBlogWithImage);
+router.get("/fetch", GetBlogPosts);
 
-
-module.exports = {
-    routes: router
-}
+module.exports = router;

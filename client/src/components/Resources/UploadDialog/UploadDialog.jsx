@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./UploadDialog.css";
-import { DEPARTMENT, COURSES } from "../../data";
+import { DEPARTMENT, COURSES } from "../../../data";
 import Select from "react-select";
 import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
@@ -60,14 +60,10 @@ const UploadDialog = ({ open, onClose }) => {
   const submitHandler = () => {
     const { department, courseName, courseCode, year } = resourceInfo;
 
-    if (
-      department === "" ||
-      courseName === "" ||
-      courseCode === "" ||
-      year === "" ||
-      file === ""
-    ) {
+    if (!department || !courseName || !courseCode || !year || !file) {
       alert("All fields are required for submitting resource.");
+      onClose();
+      return;
     }
 
     const formData = new FormData();

@@ -1,4 +1,4 @@
-import React,{ useEffect } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Logout = () => {
@@ -8,17 +8,18 @@ const Logout = () => {
     if (!token) {
       navigate("/login");
     } else {
-      navigate("/homepage");
+      navigate("/");
     }
   };
 
   useEffect(() => {
     logoutPage();
-  }, []);
-  return(
-      <>
+  });
+
+  return (
+    <>
       <h1>LogOut....</h1>
-      </>
+    </>
   );
 };
 

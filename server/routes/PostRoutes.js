@@ -1,12 +1,9 @@
-const express = require('express')
-const route = express.Router()
-const { upload } = require('../helpers/filehelper');
-const {
-    PostUpload,
-    PostGet
-} = require('../controllers/PostUploadController');
+const express = require("express");
+const route = express.Router();
+const { upload } = require("../helpers/filehelper");
+const { PostWithImage, GetPosts } = require("../controllers/PostController");
 
-route.post('/post', upload.array('files'), PostUpload);
-route.get('/postget', PostGet);
+route.post("/post", upload.array("files"), PostWithImage);
+route.get("/fetch", GetPosts);
 
-module.exports = route
+module.exports = route;

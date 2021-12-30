@@ -25,7 +25,7 @@ const BlogPost = () => {
       for (let i = 0; i < multipleFiles.length; i++) {
         formData.append("files", multipleFiles[i]);
       }
-      await axios.post("http://localhost:5000/api/blogUpload",formData);
+      await axios.post("http://localhost:5000/blog/post",formData);
      }else{
        alert("Please Write your blog..")
      }

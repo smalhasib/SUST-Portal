@@ -41,6 +41,23 @@
     font-family: "Josefin Sans", sans-serif;
 }
 
+.reg_wrapper .form .input_field_selector {
+    position: relative;
+    margin-bottom: 20px;
+    font-family: "Josefin Sans", sans-serif;
+    background: #eeeeee;
+    border-radius: 20px;
+}
+
+.reg_wrapper .form .input_field_selector i {
+    position: absolute;
+    top: 9px;
+    left: 15px;
+    font-size: 18px;
+    color: #1d2120;
+    opacity: 0.8;
+}
+
 .reg_wrapper .form .input_field .input {
     width: 100%;
     padding: 10px 45px;

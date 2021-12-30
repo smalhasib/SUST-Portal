@@ -1,4 +1,4 @@
-.homepage {
+.dailyupdates {
     height: 100vh;
     width: 100%;
     display: flex;
@@ -6,7 +6,7 @@
     align-items: center;
     background: #eeeeee;
 }
-.homepage .create_btn{
+.dailyupdates .create_btn{
     height: auto;
     width: 40%;
     display: flex;
@@ -19,7 +19,7 @@
     transform: translate(-50%, -50%);
 
 }
-.homepage .create_btn button{
+.dailyupdates .create_btn button{
     width: 70%;
     padding: .5rem;
     border: none;
@@ -30,7 +30,7 @@
     cursor: pointer;
     border-radius: 7px;
 }
-.homepage .create_btn button:hover{
+.dailyupdates .create_btn button:hover{
     letter-spacing: 2px;
  
 }
