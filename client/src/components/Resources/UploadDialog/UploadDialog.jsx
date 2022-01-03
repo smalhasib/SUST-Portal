@@ -68,10 +68,10 @@ const UploadDialog = ({ open, onClose }) => {
 
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("department", resourceInfo.department);
-    formData.append("courseName", resourceInfo.courseName);
-    formData.append("courseCode", resourceInfo.courseCode);
-    formData.append("year", resourceInfo.year);
+    formData.append("department", department);
+    formData.append("courseName", courseName);
+    formData.append("courseCode", courseCode);
+    formData.append("year", year);
 
     axios
       .post("http://localhost:5000/resources/upload", formData)

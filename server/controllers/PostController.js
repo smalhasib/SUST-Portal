@@ -1,5 +1,7 @@
 const fileSizeFormatter = require("../Utils/Utility");
 const Post = require("../models/PostSchema");
+const Comment = require("../models/CommentSchema");
+const ObjectId = require("mongodb").ObjectId;
 
 const PostWithImage = async (req, res, next) => {
   try {
@@ -37,7 +39,46 @@ const GetPosts = async (req, res, next) => {
   }
 };
 
+const PostComment = async (req, res, next) => {
+  const { postId, userId, comment } = req.body;
+
+  const newComment = new Comment({
+    user: ObjectId(userId),
+    text: comment,
+  });
+
+  await newComment.save();
+
+  await Post.updateOne(
+    { _id: ObjectId(postId) },
+    {
+      $push: {
+        comments: newComment._id,
+      },
+    }
+  )
+    .then((result) => res.status(201).send("Comment added"))
+    .catch((err) => res.send(400).send(err.message));
+};
+
+const GetComments = async (req, res) => {
+  const { postId } = req.body;
+
+  Post.findOne({ _id: ObjectId(postId) })
+    .populate({
+      path: "comments",
+      populate: {
+        path: "user",
+      },
+    })
+    .exec((err, post) => {
+      post.comments.map((comment) => console.log(comment));
+    });
+};
+
 module.exports = {
   PostWithImage,
-  GetPosts
+  GetPosts,
+  PostComment,
+  GetComments,
 };
