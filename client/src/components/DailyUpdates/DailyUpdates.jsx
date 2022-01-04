@@ -6,17 +6,28 @@ import PinPost from "./PinPost/PinPost";
 import ShowPost from "./Post/ShowPost";
 import Post from "./Post/Post";
 import "./DailyUpdates.css";
+import axios from "axios";
 
 const DailyUpdates = () => {
   const navigate = useNavigate();
+  const [posts, setPosts] = useState([]);
   const [click, setClick] = useState(false);
+
+  const getPost = async () => {
+    await axios
+      .get("http://localhost:5000/post/fetch")
+      .then((res) => setPosts(res.data))
+      .catch((err) => console.log(err));
+  };
 
   useEffect(() => {
     const token = localStorage.getItem("jwtoken");
     if (!token) {
       navigate("/login");
+      return;
     }
-  });
+    getPost();
+  }, []);
 
   return (
     <>
@@ -27,7 +38,19 @@ const DailyUpdates = () => {
           <button onClick={() => setClick(!click)}>Create Post</button>
         </div>
         {click ? <Post /> : ""}
-        <ShowPost />
+        {console.log(posts)}
+        {posts.length !== 0 &&
+          posts.map((post) => (
+            <ShowPost
+              key={post._id}
+              id={post._id}
+              name={post.name}
+              department={post.department}
+              title={post.title}
+              description={post.description}
+              files={post.files}
+            />
+          ))}
         <PinPost />
       </div>
     </>

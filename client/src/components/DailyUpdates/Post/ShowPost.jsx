@@ -4,78 +4,85 @@ import "./ShowPost.css";
 import Comment from "./Comment";
 import jwt_decode from "jwt-decode";
 
-const ShowPost = () => {
-  const [allPost, setallPost] = useState([]);
-  const [comment, setcomment] = useState("");
-  const [newcomment, setNewcomment] = useState([]);
+const ShowPost = ({ id, name, department, title, description, files }) => {
+  const [newComment, setNewComment] = useState("");
+  const [comments, setComments] = useState([]);
 
   const user = jwt_decode(localStorage.getItem("jwtoken"));
 
-  const getPost = async () => {
-    const showPost = await axios.get("http://localhost:5000/post/fetch");
-    setallPost(showPost.data);
+  const getComments = async () => {
+    await axios
+      .get("http://localhost:5000/post/fetchComments", {
+        params: {
+          postId: id,
+        },
+      })
+      .then((res) => setComments(res.data))
+      .catch((err) => console.log(err));
   };
 
-  const Comments = () => {
-    if (comment.length < 1) return;
+  const CommentHandler = () => {
+    if (newComment.length < 1) return;
 
     axios
       .post("http://localhost:5000/post/comment", {
-        postId: "61d360f6686baa9d8cc104fd",
+        postId: id,
         userId: user._id,
-        comment: comment,
+        comment: newComment,
       })
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
 
-    setcomment("");
+    setNewComment("");
   };
 
-  const commentHandler = (e) => {
-    setcomment(e.target.value);
+  const commentTextHandler = (e) => {
+    setNewComment(e.target.value);
   };
 
   useEffect(() => {
-    getPost();
+    getComments();
   }, []);
 
   return (
     <>
-      <div className="showpost_container">
-        {allPost.map((element, index) => (
-          <div key={element._id} className="show_post">
-            <div className="user_post">
-              <i className="fas fa-user"></i>
-              <div className="user_dtl">
-                <h5>{element.name}</h5>
-                <h6>{element.department}</h6>
-              </div>
-            </div>
-            <h4>{element.title}</h4>
-            <p>{element.description}</p>
-            {element.files.map((file, index) => (
-              <img
-                key={file._id}
-                src={`http://localhost:5000/${file.filePath}`}
-                className="img"
-                alt="img"
-              />
-            ))}
-            <div className="post_comment">
-              <i className="fas fa-comments"></i>
-              <input
-                type="text"
-                value={comment}
-                placeholder="comments...."
-                onChange={commentHandler}
-              />
-              <button onClick={Comments}>comment</button>
-            </div>
-            {newcomment.map((comment, key) => {
-              return <Comment comment={comment} />;
-            })}
+      <div className="show_post">
+        <div className="user_post">
+          <i className="fas fa-user"></i>
+          <div className="user_dtl">
+            <h5>{name}</h5>
+            <h6>{department}</h6>
           </div>
+        </div>
+        <h4>{title}</h4>
+        <p>{description}</p>
+        {files.map((file, index) => (
+          <img
+            key={file._id}
+            src={`http://localhost:5000/${file.filePath}`}
+            className="img"
+            alt="img"
+          />
         ))}
+        <div className="post_comment">
+          <i className="fas fa-comments"></i>
+          <input
+            type="text"
+            value={newComment}
+            placeholder="comments...."
+            onChange={commentTextHandler}
+          />
+          <button onClick={CommentHandler}>comment</button>
+        </div>
+        {comments !== 0 &&
+          comments.map((comment) => (
+            <Comment
+              key={comment._id}
+              userName={comment.user.name}
+              department={comment.user.department}
+              text={comment.text}
+            />
+          ))}
       </div>
     </>
   );

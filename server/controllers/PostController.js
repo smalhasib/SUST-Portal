@@ -59,10 +59,11 @@ const PostComment = async (req, res, next) => {
   )
     .then((result) => res.status(201).send("Comment added"))
     .catch((err) => res.send(400).send(err.message));
-};
+}; 
 
 const GetComments = async (req, res) => {
-  const { postId } = req.body;
+  const { postId } = req.query;
+  console.log(postId);
 
   Post.findOne({ _id: ObjectId(postId) })
     .populate({
@@ -72,7 +73,8 @@ const GetComments = async (req, res) => {
       },
     })
     .exec((err, post) => {
-      post.comments.map((comment) => console.log(comment));
+      if (err) console.log(err);
+      res.status(200).json(post.comments)
     });
 };
 
