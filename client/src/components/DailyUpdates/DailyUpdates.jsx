@@ -15,9 +15,9 @@ const DailyUpdates = () => {
 
   const filterHandler = (selectedFilter) => {
     getPost(selectedFilter);
-  }
+  };
 
-  const getPost = async (filter="All") => {
+  const getPost = async (filter = "All") => {
     await axios
       .get("http://localhost:5000/post/fetch", {
         params: {
@@ -46,20 +46,19 @@ const DailyUpdates = () => {
           <button onClick={() => setClick(!click)}>Create Post</button>
         </div>
         {click ? <Post /> : ""}
-        {console.log(posts)}
         <div className="showPost">
-        {posts.length !== 0 &&
-          posts.map((post) => (
-            <ShowPost
-              key={post._id}
-              id={post._id}
-              name={post.name}
-              department={post.department}
-              title={post.title}
-              description={post.description}
-              files={post.files}
-            />
-          ))}
+          {posts.length !== 0 &&
+            posts.map((post) => (
+              <ShowPost
+                key={post._id}
+                id={post._id}
+                name={post.name}
+                department={post.department}
+                title={post.title}
+                description={post.description}
+                files={post.files}
+              />
+            ))}
         </div>
         <PinPost />
       </div>
