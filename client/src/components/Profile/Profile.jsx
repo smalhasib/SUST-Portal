@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 import "./Profile.css";
+import dp from "./profile_img.jpg"
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -41,9 +42,7 @@ const Profile = () => {
       <div className="about_container">
         <div className="about">
           <div className="dp">
-            <div className="dp_img">
-              <img src="" alt="Profile Picture" />
-            </div>
+             <img src={dp} alt="" />
             <div className="image">
               <input type="file" className="dp_file" />
               <button>upload</button>
@@ -57,43 +56,9 @@ const Profile = () => {
               <i class="fas fa-edit"></i>
             </div>
             <div className="depReg">
-              <h4>Registration : {userData.registration}</h4>
-              <h4>Department : {userData.department}</h4>
+              <h4>Registration: {userData.registration}</h4>
+              <h4>Department: {userData.department}</h4>
             </div>
-          </div>
-        </div>
-        <div className="timeline">
-          <div className="user_post">
-            <h3>First Post</h3>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum
-              culpa eum nobis incidunt maxime possimus natus, ex vel itaque
-              iste?
-            </p>
-          </div>
-          <div className="user_post">
-            <h3>Second Post</h3>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum
-              culpa eum nobis incidunt maxime possimus natus, ex vel itaque
-              iste?
-            </p>
-          </div>
-          <div className="user_post">
-            <h3>Third Post</h3>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum
-              culpa eum nobis incidunt maxime possimus natus, ex vel itaque
-              iste?
-            </p>
-          </div>
-          <div className="user_post">
-            <h3>Forth Post</h3>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum
-              culpa eum nobis incidunt maxime possimus natus, ex vel itaque
-              iste?
-            </p>
           </div>
         </div>
       </div>

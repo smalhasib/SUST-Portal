@@ -45,7 +45,7 @@ const DailyUpdates = () => {
         <div className="create_btn">
           <button onClick={() => setClick(!click)}>Create Post</button>
         </div>
-        {click ? <PostBox /> : ""}
+        {click ? <PostBox/> : ""}
         <div className="showPost">
           {posts.length !== 0 &&
             posts.map((post) => (

@@ -7,13 +7,12 @@
 }
 .about_container .about{
     max-width: 550px;
-    /* height: auto; */
-    max-height: 230px;
+    max-height: 450px;
     box-shadow: 0 9px 15px rgba(0, 0, 0, 0.2);
-    display: flex;
+    /* display: flex; */
     /* flex-wrap: wrap; */
+    margin-top: 3rem;
     padding: .3rem;
-    margin-top: 5rem;
 
 }
 .about_container .timeline{
@@ -23,19 +22,21 @@
     flex-direction: column;
     padding: .3rem;
 }
-.about_container .about .dp .dp_img{
-    height: 170px;
-    width: 60%;
+.about_container .about .dp{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .about_container .about .dp img{
-    height: 170px;
-    width: 60%;
+    height: 300px;
+    width: 80%;
     /* margin: 1rem 0rem; */
 }
 .about_container .about .dp .dp_file{
     padding: .3rem .1rem;
     border: 1px solid rgb(209, 198, 198);
-    width: 60%;
+    width: 90%;
 }
 .about_container .about .dp .image{
     display: flex;
@@ -56,9 +57,6 @@
     align-items: center;
     padding: .8rem;
     line-height: 1.5;
-    /* position: absolute;
-    top: 25px;
-    left: 210px; */
 }
 .about_container .about .user_details .user{
     display: flex;
@@ -74,16 +72,12 @@
 }
 .about_container .about .user_details .depReg{
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: .4rem;
 }
-.about_container .about .user_details .depReg h4{
-    padding: 1rem;
-    margin-right: .5rem;
-}
-.about_container .about .user_details .depReg h5{
-    padding: 1rem;
-    margin-left: .5rem;
-}
+
 .about_container .timeline .user_post{
     width: 100%;
     height: auto;

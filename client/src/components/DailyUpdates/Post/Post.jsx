@@ -81,7 +81,6 @@ const Post = ({ id, name, department, title, description, files }) => {
             <Comment
               key={comment._id}
               userName={comment.user.name}
-              department={comment.user.department}
               text={comment.text}
             />
           ))}

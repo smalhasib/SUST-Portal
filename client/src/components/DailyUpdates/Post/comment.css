@@ -7,11 +7,18 @@
 .show_comment .cmt{
     display: flex;
 }
-.show_comment .cmt h5{
-    padding: .3rem;
-    opacity: .9;
+.show_comment .cmt .txt{
+    display: flex;
+    flex-direction: column;
+}
+.show_comment .cmt h6{
+    padding: .2rem;
+    color: #3e065f;
+}
+.show_comment .cmt p{
+    font-size: 15px;
+    margin-left: 8px;
 }
 .show_comment .cmt i{
-    padding: .2rem;
     color: #3e065f;
 }
