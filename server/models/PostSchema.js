@@ -13,6 +13,10 @@ const PostSchema = Schema(
       type: String,
       required: true,
     },
+    type: {
+      type: String,
+      required: true,
+    },
     files: [Object],
     comments: [
       {

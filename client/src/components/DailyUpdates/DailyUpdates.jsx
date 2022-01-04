@@ -13,9 +13,17 @@ const DailyUpdates = () => {
   const [posts, setPosts] = useState([]);
   const [click, setClick] = useState(false);
 
-  const getPost = async () => {
+  const filterHandler = (selectedFilter) => {
+    getPost(selectedFilter);
+  }
+
+  const getPost = async (filter="All") => {
     await axios
-      .get("http://localhost:5000/post/fetch")
+      .get("http://localhost:5000/post/fetch", {
+        params: {
+          type: filter,
+        },
+      })
       .then((res) => setPosts(res.data))
       .catch((err) => console.log(err));
   };
@@ -33,7 +41,7 @@ const DailyUpdates = () => {
     <>
       <Header />
       <div className="dailyupdates">
-        <FilterPost />
+        <FilterPost filterHandler={filterHandler} />
         <div className="create_btn">
           <button onClick={() => setClick(!click)}>Create Post</button>
         </div>

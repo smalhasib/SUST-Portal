@@ -4,6 +4,8 @@ const Comment = require("../models/CommentSchema");
 const ObjectId = require("mongodb").ObjectId;
 
 const PostWithImage = async (req, res, next) => {
+  const { name, department, title, description, type } = req.body;
+
   try {
     console.log(req.body);
     let filesArray = [];
@@ -17,10 +19,11 @@ const PostWithImage = async (req, res, next) => {
       filesArray.push(file);
     });
     const post = new Post({
-      name: req.body.name,
-      department: req.body.department,
-      title: req.body.title,
-      description: req.body.description,
+      name: name,
+      department: department,
+      title: title,
+      description: description,
+      type: type,
       files: filesArray,
     });
     await post.save();
@@ -30,10 +33,16 @@ const PostWithImage = async (req, res, next) => {
   }
 };
 
-const GetPosts = async (req, res, next) => {
+const GetPosts = async (req, res) => {
+  const query = req.query.type;
   try {
-    const post = await Post.find();
-    res.status(200).send(post);
+    if (query === "All") {
+      const post = await Post.find();
+      res.status(200).send(post);
+    } else {
+      const post = await Post.find({ type: query });
+      res.status(200).send(post);
+    }
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -59,7 +68,7 @@ const PostComment = async (req, res, next) => {
   )
     .then((result) => res.status(201).send("Comment added"))
     .catch((err) => res.send(400).send(err.message));
-}; 
+};
 
 const GetComments = async (req, res) => {
   const { postId } = req.query;
@@ -74,7 +83,7 @@ const GetComments = async (req, res) => {
     })
     .exec((err, post) => {
       if (err) console.log(err);
-      res.status(200).json(post.comments)
+      res.status(200).json(post.comments);
     });
 };
 
