@@ -75,10 +75,15 @@
     cursor: pointer;
     margin-top: 2px;
 }
-
+.post_container .file_input{
+    display: flex;
+}
 .post_container .file_input {
-    width: 100%;
+    width: 95%;
     max-height: 40px;
+}
+.post_container .file_input input{
+    margin-right: 1rem;
 }
 .post_container .file {
     font-size: 13px;
