@@ -74,6 +74,7 @@ const ShowPost = ({ id, name, department, title, description, files }) => {
           />
           <button onClick={CommentHandler}>comment</button>
         </div>
+        
         {comments !== 0 &&
           comments.map((comment) => (
             <Comment

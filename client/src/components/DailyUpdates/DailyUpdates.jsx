@@ -47,6 +47,7 @@ const DailyUpdates = () => {
         </div>
         {click ? <Post /> : ""}
         {console.log(posts)}
+        <div className="showPost">
         {posts.length !== 0 &&
           posts.map((post) => (
             <ShowPost
@@ -59,6 +60,7 @@ const DailyUpdates = () => {
               files={post.files}
             />
           ))}
+        </div>
         <PinPost />
       </div>
     </>
