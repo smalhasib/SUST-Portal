@@ -1,110 +1,92 @@
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import React, { useState } from "react";
-import Select from "react-select";
 import "./Post.css";
+import Comment from "./Comment";
 import jwt_decode from "jwt-decode";
 
-const options = [
-  { value: "All", label: "All" },
-  { value: "Educational", label: "Educational" },
-  { value: "Official", label: "Official" },
-  { value: "Political", label: "Political" },
-  { value: "Organization", label: "Organization" },
-];
+const Post = ({ id, name, department, title, description, files }) => {
+  const [newComment, setNewComment] = useState("");
+  const [comments, setComments] = useState([]);
 
-const Post = () => {
-  const [title, setTitle] = useState("");
-  const [description, setdescription] = useState("");
-  const [multipleFiles, setMultipleFiles] = useState("");
-  const [type, setType] = useState("");
+  const user = jwt_decode(localStorage.getItem("jwtoken"));
 
-  const MultipleFileChange = (e) => {
-    setMultipleFiles(e.target.files);
+  const getComments = async () => {
+    await axios
+      .get("http://localhost:5000/post/fetchComments", {
+        params: {
+          postId: id,
+        },
+      })
+      .then((res) => setComments(res.data))
+      .catch((err) => console.log(err));
   };
 
-  const token = localStorage.getItem("jwtoken");
-  const decoded = jwt_decode(token);
+  const CommentHandler = () => {
+    if (newComment.length < 1) return;
 
-  const UploadMultipleFiles = async () => {
-    if (description.length > 0 || multipleFiles.length > 0) {
-      const formData = new FormData();
-      formData.append("title", title);
-      formData.append("description", description);
-      formData.append("type", type);
-      formData.append("name", decoded.name);
-      formData.append("department", decoded.department);
+    axios
+      .post("http://localhost:5000/post/comment", {
+        postId: id,
+        userId: user._id,
+        comment: newComment,
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
 
-      for (let i = 0; i < multipleFiles.length; i++) {
-        formData.append("files", multipleFiles[i]);
-      }
-
-      await axios
-        .post("http://localhost:5000/post/post", formData)
-        .catch((err) => console.log(err));
-    } else {
-      alert("Please write your post..");
-    }
+    setNewComment("");
     window.location.reload();
   };
 
+  const commentTextHandler = (e) => {
+    setNewComment(e.target.value);
+  };
+
+  useEffect(() => {
+    getComments();
+  }, []);
+
   return (
     <>
-      <div className="post_container">
-        <div className="input_field">
+      <div className="show_post">
+        <div className="user_post">
+          <i className="fas fa-user"></i>
+          <div className="user_dtl">
+            <h5>{name}</h5>
+            <h6>{department}</h6>
+          </div>
+        </div>
+        <h4>{title}</h4>
+        <p>{description}</p>
+        {files.map((file, index) => (
+          <img
+            key={file._id}
+            src={`http://localhost:5000/${file.filePath}`}
+            className="img"
+            alt="img"
+          />
+        ))}
+        <div className="post_comment">
+          <i className="fas fa-comments"></i>
           <input
             type="text"
-            className="input_title"
-            placeholder="Title"
-            onChange={(e) => setTitle(e.target.value)}
+            value={newComment}
+            placeholder="comments...."
+            onChange={commentTextHandler}
           />
-        </div>
-        <div className="input_field">
-          <textarea
-            type="text"
-            placeholder="Write your blog...."
-            className="input"
-            onChange={(e) => setdescription(e.target.value)}
-            cols=""
-            rows="3"
-          ></textarea>
-        </div>
-        <div className="file_input">
-          <input
-            type="file"
-            className="file"
-            onChange={(e) => MultipleFileChange(e)}
-          />
-
-          <Select
-            options={options}
-            onChange={(e) => setType(e.value)}
-            placeholder="Type"
-            styles={{
-              container: (provided, state) => ({
-                ...provided,
-                width: "200px",
-                marginLeft: "20px",
-                border: "1px soldi gray ",
-              }),
-              control: (provided, state) => ({
-                ...provided,
-                border: 0,
-                boxShadow: "none",
-              }),
-            }}
-          />
+          <button onClick={CommentHandler}>comment</button>
         </div>
 
-        <button
-          type="button"
-          onClick={() => UploadMultipleFiles()}
-          className="btn"
-        >
-          Post
-        </button>
+        {comments !== 0 &&
+          comments.map((comment) => (
+            <Comment
+              key={comment._id}
+              userName={comment.user.name}
+              department={comment.user.department}
+              text={comment.text}
+            />
+          ))}
       </div>
     </>
   );
 };
-
 export default Post;

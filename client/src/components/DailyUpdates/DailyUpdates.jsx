@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import FilterPost from "./FilterPost/FilterPost";
 import Header from "../Header/Header";
 import PinPost from "./PinPost/PinPost";
-import ShowPost from "./Post/ShowPost";
 import Post from "./Post/Post";
+import PostBox from "./Post/PostBox";
 import "./DailyUpdates.css";
 import axios from "axios";
 
@@ -45,11 +45,11 @@ const DailyUpdates = () => {
         <div className="create_btn">
           <button onClick={() => setClick(!click)}>Create Post</button>
         </div>
-        {click ? <Post /> : ""}
+        {click ? <PostBox /> : ""}
         <div className="showPost">
           {posts.length !== 0 &&
             posts.map((post) => (
-              <ShowPost
+              <Post
                 key={post._id}
                 id={post._id}
                 name={post.name}
