@@ -4,6 +4,7 @@ import "./BlogPost.css"
 import Header from '../Header/Header'
 import ShowBlogs from './ShowBlogs'
 import jwt_decode from "jwt-decode";
+
 const BlogPost = () => {
     const [multipleFiles, setMultipleFiles] = useState("");
     const [description, setdescription] = useState("");
@@ -25,7 +26,7 @@ const BlogPost = () => {
       for (let i = 0; i < multipleFiles.length; i++) {
         formData.append("files", multipleFiles[i]);
       }
-      await axios.post("http://localhost:5000/api/blogUpload",formData);
+      await axios.post("http://localhost:5000/blog/post",formData);
      }else{
        alert("Please Write your blog..")
      }

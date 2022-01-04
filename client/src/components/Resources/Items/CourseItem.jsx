@@ -2,10 +2,11 @@ import React, { useState, useRef } from "react";
 import "./CourseItem.css";
 import ResourceItem from "./ResourceItem";
 
-const CourseItem = (props) => {
+const CourseItem = ({ name, data }) => {
   const [isOpen, setIsOpen] = useState(false);
   const parentRef = useRef();
 
+  if (data.length === 0) return null;
   if (parentRef.current) console.log(parentRef.current.scrollHeight);
 
   const handleToggleCLick = () => {
@@ -16,7 +17,7 @@ const CourseItem = (props) => {
     <>
       <div className="collapsible">
         <button className="toggle" onClick={handleToggleCLick}>
-          {props.name}
+          {name}
         </button>
         <div
           className="content-parent"
@@ -32,7 +33,7 @@ const CourseItem = (props) => {
           }
         >
           <div className="content">
-            {props.data.map((resource) => (
+            {data.map((resource) => (
               <ResourceItem
                 key={resource._id}
                 name={resource.fileName}

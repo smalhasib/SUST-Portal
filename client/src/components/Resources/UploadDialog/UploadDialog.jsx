@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./UploadDialog.css";
-import { DEPARTMENT, COURSES } from "../../data";
+import { DEPARTMENT, COURSES } from "../../../data";
 import Select from "react-select";
 import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
@@ -60,22 +60,18 @@ const UploadDialog = ({ open, onClose }) => {
   const submitHandler = () => {
     const { department, courseName, courseCode, year } = resourceInfo;
 
-    if (
-      department === "" ||
-      courseName === "" ||
-      courseCode === "" ||
-      year === "" ||
-      file === ""
-    ) {
+    if (!department || !courseName || !courseCode || !year || !file) {
       alert("All fields are required for submitting resource.");
+      onClose();
+      return;
     }
 
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("department", resourceInfo.department);
-    formData.append("courseName", resourceInfo.courseName);
-    formData.append("courseCode", resourceInfo.courseCode);
-    formData.append("year", resourceInfo.year);
+    formData.append("department", department);
+    formData.append("courseName", courseName);
+    formData.append("courseCode", courseCode);
+    formData.append("year", year);
 
     axios
       .post("http://localhost:5000/resources/upload", formData)

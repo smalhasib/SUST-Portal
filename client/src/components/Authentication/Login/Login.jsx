@@ -18,18 +18,18 @@ const Login = () => {
     });
   };
 
-  const login = async() => {
-    const res = await axios.post("http://localhost:5000/login", user)
-  
-    if(res.status === 200){
-      console.log(res.data.token)
-      localStorage.setItem('jwtoken', res.data.token)
-      navigate("/homepage")
-    }else{
-      alert("You don't have any account. Please register first.")
-      navigate("/")
-    }
+  const login = async () => {
+    await axios.post("http://localhost:5000/login", user).then((res) => {
+      if (res.status === 200) {
+        localStorage.setItem("jwtoken", res.data.token);
+        navigate("/dailyupdates");
+      } else {
+        alert("You don't have any account. Please register first.");
+        navigate("/");
+      }
+    });
   };
+
   return (
     <>
       <div className="login_container">
