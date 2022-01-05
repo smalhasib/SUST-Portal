@@ -82,3 +82,5 @@ and see it on any time*
 *Comments option*  
 *Filter option*  
 *Verification*  
+  
+<small>&copy; 2021 - Dept. of CSE, SUST, BD</small>
