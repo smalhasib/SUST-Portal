@@ -30,13 +30,13 @@
 }
 .about_container .about .dp img{
     height: 300px;
-    width: 80%;
+    width: 100%;
     /* margin: 1rem 0rem; */
 }
 .about_container .about .dp .dp_file{
     padding: .3rem .1rem;
     border: 1px solid rgb(209, 198, 198);
-    width: 90%;
+    width: 100%;
 }
 .about_container .about .dp .image{
     display: flex;

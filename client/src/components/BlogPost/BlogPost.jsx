@@ -1,11 +1,13 @@
 import axios from 'axios'
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
+import { useNavigate } from 'react-router-dom'
 import "./BlogPost.css"
 import Header from '../Header/Header'
 import ShowBlogs from './ShowBlogs'
 import jwt_decode from "jwt-decode";
 
 const BlogPost = () => {
+    const navigate = useNavigate()
     const [multipleFiles, setMultipleFiles] = useState("");
     const [description, setdescription] = useState("");
     const [click, setClick] = useState(false)
@@ -31,6 +33,14 @@ const BlogPost = () => {
        alert("Please Write your blog..")
      }
      window.location.reload();
+    
+     useEffect(() => {
+      const token = localStorage.getItem("jwtoken");
+      if (!token) {
+        navigate("/login");
+        return;
+      }
+     }, [])
 
     };
     return (

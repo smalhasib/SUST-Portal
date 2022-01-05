@@ -4,6 +4,7 @@ import "./FilterPost.css";
 const FilterPost = ({ filterHandler }) => {
   const filterSelectHandler = (e) => {
     filterHandler(e.target.innerText);
+    
   };
 
   return (

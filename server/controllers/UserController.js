@@ -4,6 +4,8 @@ const User = require("../models/UserSchema");
 const VerifyUser = require("../models/VerifyUserSchema");
 const nodemailer = require("nodemailer");
 const { google } = require("googleapis");
+const fileSizeFormatter = require("../Utils/Utility");
+const ObjectId = require("mongodb").ObjectId;
 
 const Login = async (req, res) => {
   try {
@@ -17,7 +19,7 @@ const Login = async (req, res) => {
     if (userLogin) {
       const isMatch = await bcrypt.compare(password, userLogin.password);
 
-      var token = await userLogin.generateAuthToken(User);
+      var token = await userLogin.generateAuthToken();
       if (isMatch) {
         res.status(200).json({ token: token });
       } else {
@@ -76,6 +78,12 @@ const Verification = async (req, res) => {
         registration: verify.registration,
         email: verify.email,
         password: verify.password,
+        image: {
+          fileName: "",
+          filePath: "",
+          fileType: "",
+          fileSize: "",
+        },
       });
       user.save();
 
@@ -122,12 +130,37 @@ const AboutVerification = async (req, res) => {
     const verifyToken = jwt.verify(token, process.env.SECRET_KEY);
     await User.findOne({
       _id: verifyToken._id,
-    }).then((user) => res.status(200).json(user));
-    console.log("User authenticate");
+    }).then((user) => {
+      res.status(200).json(user);
+      console.log(user);
+    });
   } catch (error) {
     res.status(401).send("No token provided.");
     console.log(error);
   }
+};
+
+const UpdateProfile = async (req, res, next) => {
+  const { userId } = req.body;
+
+  const { originalname, path, mimetype, size } = req.file;
+  const file = {
+    fileName: originalname,
+    filePath: path,
+    fileType: mimetype,
+    fileSize: fileSizeFormatter(size, 2),
+  };
+
+  await User.updateOne(
+    { _id: ObjectId(userId) },
+    {
+      $set: {
+        image: file,
+      },
+    }
+  )
+    .then((result) => console.log(result))
+    .catch((err) => console.log(err));
 };
 
 const sentVerifiedMail = async (email, code) => {
@@ -179,4 +212,5 @@ module.exports = {
   Verification,
   ResendCode,
   AboutVerification,
+  UpdateProfile,
 };

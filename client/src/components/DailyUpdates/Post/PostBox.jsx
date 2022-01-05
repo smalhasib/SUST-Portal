@@ -8,7 +8,7 @@ const options = [
   { value: "All", label: "All" },
   { value: "Educational", label: "Educational" },
   { value: "Official", label: "Official" },
-  { value: "Political", label: "Political" },
+  { value: "Cultural", label: "Cultural" },
   { value: "Organization", label: "Organization" },
 ];
 
@@ -64,7 +64,7 @@ const PostBox = () => {
         <div className="input_field">
           <textarea
             type="text"
-            placeholder="Write your blog...."
+            placeholder="Write your post...."
             className="input"
             onChange={(e) => setdescription(e.target.value)}
             cols=""

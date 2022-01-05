@@ -67,7 +67,7 @@ const Resources = () => {
       <p
         style={{
           fontSize: "40px",
-          marginTop: "120px",
+          marginTop: "40px",
         }}
       >
         No resouce available
@@ -86,9 +86,6 @@ const Resources = () => {
         <UploadDialog open={isDialogOpen} onClose={dialogBoxHandler} />
 
         <div className="resource_header">
-          <div className="resource_text">
-            <p>SUST EDUCATIONAL ARCHIVE</p>
-          </div>
           <div className="resource_option">
             <Dropdown selected={selected} setSelected={updateDepartment} />
             <button onClick={dialogBoxHandler}>Upload Resource</button>

@@ -77,6 +77,7 @@ const UploadDialog = ({ open, onClose }) => {
       .post("http://localhost:5000/resources/upload", formData)
       .then((res) => {
         alert(res.data);
+        window.location.reload();
       })
       .catch((err) => alert(err));
     onClose();

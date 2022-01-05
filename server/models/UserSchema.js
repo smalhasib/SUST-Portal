@@ -24,6 +24,10 @@ const userSchema = new mongoose.Schema(
       required: true,
       type: String,
     },
+    image: {
+      required: true,
+      type: Object,
+    },
   },
   { timestamps: true }
 );

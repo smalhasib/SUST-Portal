@@ -1,11 +1,13 @@
 const express = require('express')
 const route = express.Router()
+const { upload } = require("../helpers/filehelper");
 const {
   Login,
   Registration,
   Verification,
   ResendCode,
   AboutVerification,
+  UpdateProfile,
 } = require("../controllers/UserController");
 
 
@@ -23,5 +25,8 @@ route.post("/resend", ResendCode)
 
 // About page ....
 route.get("/profile", AboutVerification);
+
+//uploading profile picture
+route.post("/updateProfile", upload.single("file"), UpdateProfile);
 
 module.exports = route

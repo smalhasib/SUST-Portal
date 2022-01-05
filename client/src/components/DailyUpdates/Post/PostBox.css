@@ -12,6 +12,7 @@
     box-shadow: 0 9px 15px rgba(0, 0, 0, 0.2);
     background-color: #fff;
     border-radius: 20px;
+    z-index: 1;
 }
 
 .post_btn{

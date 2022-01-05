@@ -60,7 +60,7 @@ const DailyUpdates = () => {
               />
             ))}
         </div>
-        <PinPost />
+        {/* <PinPost /> */}
       </div>
     </>
   );
