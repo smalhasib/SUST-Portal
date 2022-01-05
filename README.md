@@ -61,7 +61,7 @@ SL | Learning Task | Description | Status | Comment |
 ### Implemented Features  
 
 **Daily Updates :** *Get daily updates of our University.*  
-**BLogs of SUST :** *Write your blogs about our University.*  
+**Blogs of SUST :** *Write your blogs about our University.*  
 **Rosources :** *Get resources of different departments.*  
 ### Unimplemented Features  
 **Pin-Post :** *Where user can pin his important post on homepage.
